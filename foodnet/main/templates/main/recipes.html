@@ -1,0 +1,25 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style="font-family: 'Niconne', cursive;">
+<center><h1>Recipes Under {{category.category_name}}</h1></center><br>
+<div class="row">
+    
+    {% for rec in recipes%}
+        <div class="col-md-4 col-lg-4 ">
+        <div class="card"  style="width: 18rem;box-shadow: 5px 10px;">
+  <img style="height:200px;width;200px" class="card-img-top" src="{{rec.image.url}}" alt="Card image cap" >
+  <div class="card-body">
+    <center><a href="{{rec.recipe_slug}}"><h4 class="card-text">{{rec.recipe_name}}</h4></a></center><br>
+    <center><a href="#" class="btn delicious-btn">Check Recipe</a></center>
+  </div>
+</div><br><br>
+        </div>
+    {%  endfor %} 
+    
+</div>
+
+</div>
+<br><br>
+{% endblock %}
