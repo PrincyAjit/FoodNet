@@ -1,0 +1,326 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+<style>
+
+
+.login-block {
+    margin: 30px auto;
+    min-height: 93.6vh
+}
+
+.login-block .auth-box {
+    margin: 20px auto 0;
+    max-width: 450px !important
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: #fff
+}
+.effect7
+{
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect7:before, .effect7:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect7:after
+{
+	right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+.card .card-block {
+    padding: 1.25rem
+}
+
+.f-80 {
+    font-size: 80px
+}
+
+.form-group {
+    margin-bottom: 1.25em
+}
+
+.form-material .form-control {
+    display: inline-block;
+    height: 43px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 9px;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc
+}
+
+.label{
+    display: inline-block;
+    height: 43px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 9px;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    }
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.btn-primary {
+    background-color: #4099ff;
+    border-color: #4099ff;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s
+}
+
+.btn {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.heading {
+    font-size: 21px
+}
+
+#infoMessage p {
+    color: red !important
+}
+
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0
+}
+
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 5;
+    height: 1px
+}
+
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
+}
+</style>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+{% if type == "enduser"%}
+    {% load socialaccount %}
+    {% providers_media_js %}
+    <section class="login-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="md-float-material form-material" action="#" method="POST">
+                    {% csrf_token %}
+                        <div class="auth-box card effect7">
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="text-center heading">User Signup</h3>
+                                    </div>
+                                </div>
+                                <div class=" form-primary"> <label class="label"><b>Name</b></label></div>
+                                <div class="form-group form-primary"> <input type="text" class="form-control" name="name"  onblur="signupvalidate(this)" value="" placeholder="Name" id="name" required> </div>
+                                <div class="form-group form-primary"><p id="namealert"  hidden></p></div>
+                                <div class=" form-primary"> <label class="label"><b>Email</b></label></div>
+                                <div class="form-group form-primary"> <input type="text" class="form-control" name="email" value="" placeholder="Email" id="email" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Date of Birth</b></label></div>
+                                <div class="form-group form-primary"> <input type="date" class="form-control" name="dob" value="" placeholder="Date" id="dob" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Upload Photo</b></label></div>
+                                <div class="form-group form-primary"> <input type="file" class="form-control" name="photo" accept = ".image/*" id="photo" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Enter Bio</b></label></div>
+                                <div class="form-group form-primary"> <textarea name="bio" class="form-control" rows="3" required></textarea> </div>
+                                <div class=" form-primary"> <label class="label"><b>Password</b></label></div>
+                                <div class="form-group form-primary"> <input type="password" class="form-control" name="password" placeholder="Password" value="" id="password" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Repeat Password</b></label></div>
+                                <div class="form-group form-primary"> <input type="password" class="form-control" name="password_confirm" placeholder="Repeat password" onblur="signupvalidate(this)" value="" id="password_confirm" required> </div>
+                                <div class="form-group form-primary"><p id="passwordalert"  hidden></p></div>
+                                <input type="text" name="signup_type" value="enduser" id="signup_type" hidden>
+                                <div class="row">
+                                    <div class="col-md-12"> <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" name="submit" value="Signup Now"> <!-- <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="fa fa-lock"></i> Signup Now </button> -->
+                                    </div>
+                                </div>
+                                <div class="or-container">
+                                    <div class="line-separator"></div>
+                                    <div class="or-label">or</div>
+                                    <div class="line-separator"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12"> <a class="btn btn-lg btn-google btn-block text-uppercase btn-outline" href="{% provider_login_url 'google' %}"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup Using Google</a> </div>
+                                </div> <br>
+                                <p class="text-inverse text-center">Already have an account? <a href="login?login_type=enduser" data-abc="true">Login</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% comment %} {% endif %} {% endcomment %}
+ {% elif type == "chef" %}
+    <section class="login-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="md-float-material form-material" action="#" method="POST">
+                    {% csrf_token %}
+                        <div class="auth-box card effect7">
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="text-center heading">Chef Signup</h3>
+                                    </div>
+                                </div>
+                                <div class=" form-primary"> <label class="label"><b>Name</b></label></div>
+                                <div class="form-group form-primary"> <input type="text" class="form-control" name="first_name" onblur="signupvalidate(this)" value="" placeholder="Name" id="name" required> </div>
+                                <div class="form-group form-primary"><p id="namealert" value="5"  hidden></p></div>
+                                <div class=" form-primary"> <label class="label"><b>Email</b></label></div>
+                                <div class="form-group form-primary"> <input type="text" class="form-control" name="email" value="" placeholder="Email" id="email" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Date of Birth</b></label></div>
+                                <div class="form-group form-primary"> <input type="date" class="form-control" name="dob" value="" placeholder="Date" id="dob" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Upload Photo</b></label></div>
+                                <div class="form-group form-primary"> <input type="file" class="form-control" name="photo" accept = ".image/*" id="photo" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Upload Documents</b></label></div>
+                                <div class="form-group form-primary"> <input type="file" class="form-control" name="files" id="files" multiple required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Enter Bio</b></label></div>
+                                <div class="form-group form-primary"> <textarea name="bio" class="form-control" rows="3" required></textarea> </div>
+                                <div class=" form-primary"> <label class="label"><b>Password</b></label></div>
+                                <div class="form-group form-primary"> <input type="password" class="form-control" name="password" placeholder="Password" value="" id="password" required> </div>
+                                <div class=" form-primary"> <label class="label"><b>Repeat Password</b></label></div>
+                                <div class="form-group form-primary"> <input type="password" class="form-control" onblur="signupvalidate(this)" name="password_confirm" placeholder="Repeat password" value="" id="password_confirm" required> </div>
+                                <div class="form-group form-primary"><p id="passwordalert"  hidden></p></div>
+                                <input type="text" name="signup_type" value="chef" id="signup_type" hidden>
+                                <div class="row">
+                                    <div class="col-md-12"> <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" name="submit" value="Signup Now"> <!-- <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="fa fa-lock"></i> Signup Now </button> -->
+                                    </div>
+                                </div>
+                                
+                                <p class="text-inverse text-center">Already have an account? <a href="login?login_type=chef" data-abc="true">Login</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> 
+{% endif %}
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("dob").setAttribute("max", today);
+function signupvalidate(a){
+    var nameexp=/^[a-zA-Z ]+$/;
+    
+    if(a.id == 'name'){
+         var name = a.value;
+        if(name!=''){
+            
+            if(nameexp.test(name) == false){
+                     console.log(name);
+                     document.getElementById("namealert").hidden=false;
+                     document.getElementById("namealert").innerHTML='Invalid name,Please enter again';
+                    document.getElementById("namealert").style.color = "red";
+                    document.getElementById("namealert").style.fontSize = "small";
+                     document.getElementById("name").value = "";
+                    
+                    
+            }
+            else{
+                    
+                    document.getElementById("namealert").hidden=true;
+                    
+            }
+    }
+    else{
+        document.getElementById("namealert").hidden=true;
+    }
+    }
+    
+    if(a.id == 'password_confirm'){
+        var password = document.getElementById("password");
+          if(password.value != a.value) {
+            document.getElementById("passwordalert").innerHTML='Passwords dont match';
+            document.getElementById("passwordalert").style.color = "red";
+            document.getElementById("passwordalert").style.fontSize = "small";
+            document.getElementById("passwordalert").hidden=false;
+            
+       } else {
+         document.getElementById("passwordalert").hidden=true;
+       }  
+    }
+
+}
+</script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+{% endblock %}

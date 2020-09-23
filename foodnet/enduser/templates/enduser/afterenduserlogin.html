@@ -1,0 +1,33 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            <div class="card" style="width: 18rem;border-radius:10px;">
+                <div class="card-body">
+                <img style="height:250px;width;200px" class="card-img-top" src="{{enduserinfo.enduser_photo.url}}" alt="Card image cap" >
+                    <h5 class="card-title">{{enduserinfo.enduser_name}}</h5>
+                    <p>{{enduserinfo.enduser_bio}}</p>
+                    {% comment %} <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-8">
+        <div class="card" style="width:100%;border-radius:10px;">
+                <div class="card-body">
+                <img style="height:250px;width;200px" class="card-img-top" src="{{enduserinfo.enduser_photo.url}}" alt="Card image cap" >
+                    <h5 class="card-title">{{enduserinfo.enduser_name}}</h5>
+                    <p>{{enduserinfo.enduser_bio}}</p>
+                    {% comment %} <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+
+{% endblock %}

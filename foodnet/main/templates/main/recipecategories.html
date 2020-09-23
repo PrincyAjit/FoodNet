@@ -1,14 +1,21 @@
 {% extends "main/header.html" %}
 {% load static %}
 {% block content %}
+<style>
+h1,h2,h3,h4{
+    font-family: 'Niconne', cursive;
+}
+</style>
 
-<div class="container-fluid" style="font-family: 'Niconne', cursive;">
+
+
+<div class="container-fluid recipecategories">
 <center><h1>Recipe Categories</h1></center><br>
 <div class="row">
     
     {% for cat in categories%}
         <div class="col-md-3 col-lg-3 ">
-        <div class="card"  style="width: 18rem;box-shadow: 5px 10px;">
+        <div class="card"  style="width: 18rem;">
   <img style="height:200px;width;200px" class="card-img-top" src="{{cat.category_image.url}}" alt="Card image cap" >
   <div class="card-body">
     <center><a href="{{cat.category_slug}}"><h4 class="card-text">{{cat.category_name}}</h4></a></center>

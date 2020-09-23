@@ -4,19 +4,17 @@ import datetime,django
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+
 # Create your models here.
 class EndUser(models.Model):
-    enduser_name=models.CharField(max_length=30)
+    enduser_name=models.CharField(max_length=30) 
     enduser_email=models.EmailField(unique=True)
+    date_joined=models.DateTimeField(default=django.utils.timezone.now)  
     enduser_dob=models.DateField(default=datetime.date.today)
-    enduser_password=models.CharField(max_length=15)
+    enduser_password=models.CharField(max_length=100)
     enduser_photo=models.ImageField(upload_to='enduser_images/')
-    enduser_country=models.CharField(max_length=50,default=None)
-    enduser_state=models.CharField(max_length=50,default=None)
-    enduser_city=models.CharField(max_length=50,default=None)
-    enduser_bio=models.TextField()
-    # def __str__(self): #overriding string method that generally returns the object
-	#     return self.enduser_id
+    enduser_bio=models.TextField(default="-")
+    is_active=models.BooleanField(default=False)
     
 class EndUserRecipe(models.Model):
     enduser=models.ForeignKey(EndUser,on_delete=models.SET_NULL,null=True)

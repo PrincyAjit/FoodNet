@@ -1,0 +1,39 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+<style>
+h1,h2,h3,h4{
+    font-family: 'Niconne', cursive;
+}
+</style>
+
+
+
+<div class="container-fluid">
+<h1>{{recipe.recipe_name}}</h1>
+<div class="row h100">
+<div class="col-md-6 col-lg-6">
+<img style="height:350px;width;400px" src="{{recipe.image.url}}" >
+</div>
+<div class="col-md-6 col-lg-6">
+<h3>Ingredients</h3>
+<p>{{recipe.ingredient_list|safe}}</p>    
+</div>
+</div>
+<br>
+<div class="row h100">
+
+<div class="col-md-12 col-lg-12">
+   <h3>Procedure</h3>
+<p align="center">{{recipe.recipe_procedure|safe}}</p>       
+</div>
+</div>
+<div class="row h100">
+<div class="col-md-12 col-lg-12">
+   <center><p>{{recipe.video|safe}}</p></center>
+</div>
+</div>
+
+</div>
+<br><br>
+{% endblock %}

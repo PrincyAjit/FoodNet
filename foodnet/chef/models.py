@@ -9,13 +9,11 @@ from django.contrib.contenttypes.models import ContentType
 class Chef(models.Model):
     chef_name=models.CharField(max_length=30)
     chef_email=models.EmailField(unique=True)
+    date_joined=models.DateTimeField(default=django.utils.timezone.now)
     chef_password=models.CharField(max_length=15)
     chef_dob=models.DateField(default=datetime.date.today)
     chef_photo=models.ImageField(upload_to='chef_images_files/')
-    chef_bio=models.TextField(default="None")
-    chef_country=models.CharField(max_length=50,default=None)
-    chef_state=models.CharField(max_length=50,default=None)
-    chef_city=models.CharField(max_length=50,default=None)
+    chef_bio=models.TextField(default="-")
     validation_counts=models.PositiveIntegerField(default=0) #no of recipes they have validated
     # def __str__(self):#overriding string method that generally returns the object
     #     return self.chef_id

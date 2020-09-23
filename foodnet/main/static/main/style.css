@@ -1219,9 +1219,17 @@ textarea:focus {
     margin-bottom: 0;
     padding-left: 30px; }
 
+    /* css for content of all other pages except homepage.html */
+/* css for recipecategories.html */
+.recipecategories h1{
+  font-family: 'Niconne', cursive;
+}
+/* .recipecategories .card{
+  box-shadow: 5px 10px;
+  font-size:15px;
+} */
+/* end of css for recipecategories.html */
 /*# sourceMappingURL=style.css.map */
-
-
 
 
 
