@@ -21,7 +21,9 @@ from .import views
 app_name="main"
 urlpatterns = [
 	path("",views.homepage,name="homepage"),
+    path("about",views.about,name="about"),
+    path("contact",views.contact,name="contact"),
     path("recipescategories",views.recipescategories,name="recipescategories"),
+    path("appliancecategories",views.appliancecategories,name="appliancecategories"),
     path("<single_slug>",views.single_slug,name="single_slug"),
-    # path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
