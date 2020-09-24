@@ -13,6 +13,7 @@ from django.core.mail import EmailMessage
 from django.urls import reverse
 import django,datetime
 import logging
+from django.core.files.storage import FileSystemStorage
 logger = logging.getLogger("mylogger")
 
 # Create your views here.
@@ -39,7 +40,13 @@ def signup(request):
 				return render(request=request,template_name="main/signup.html",context={"type":signuptype})
 			else:	
 				encryptedpassword=make_password(request.POST['password'],"a")
-				enduser=EndUser(enduser_name=request.POST['name'],enduser_email=request.POST['email'],enduser_dob=request.POST['dob'],enduser_password=encryptedpassword,enduser_photo=request.POST['photo'],enduser_bio=request.POST['bio'])
+				photo=request.FILES['userphoto']
+				logger.info(photo)
+				fs=FileSystemStorage()
+				filename=fs.save('enduser_images/'+photo.name,photo)
+				photo_url=fs.url(filename)
+				logger.info(photo)
+				enduser=EndUser(enduser_name=request.POST['name'],enduser_email=request.POST['email'],enduser_dob=request.POST['dob'],enduser_password=encryptedpassword,enduser_photo=photo_url,enduser_bio=request.POST['bio'])
 				enduser.is_active=False
 				enduser.save()
 				emailid=request.POST['email']

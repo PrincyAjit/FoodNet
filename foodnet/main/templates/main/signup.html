@@ -171,7 +171,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="md-float-material form-material" action="#" method="POST">
+                    <form class="md-float-material form-material" action="#" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                         <div class="auth-box card effect7">
                             <div class="card-block">
@@ -188,7 +188,7 @@
                                 <div class=" form-primary"> <label class="label"><b>Date of Birth</b></label></div>
                                 <div class="form-group form-primary"> <input type="date" class="form-control" name="dob" value="" placeholder="Date" id="dob" required> </div>
                                 <div class=" form-primary"> <label class="label"><b>Upload Photo</b></label></div>
-                                <div class="form-group form-primary"> <input type="file" class="form-control" name="photo" accept = ".image/*" id="photo" required> </div>
+                                <div class="form-group form-primary"> <input type="file" class="form-control" name="userphoto" accept = ".image/*" id="userphoto" required> </div>
                                 <div class=" form-primary"> <label class="label"><b>Enter Bio</b></label></div>
                                 <div class="form-group form-primary"> <textarea name="bio" class="form-control" rows="3" required></textarea> </div>
                                 <div class=" form-primary"> <label class="label"><b>Password</b></label></div>
@@ -240,7 +240,7 @@
                                 <div class=" form-primary"> <label class="label"><b>Date of Birth</b></label></div>
                                 <div class="form-group form-primary"> <input type="date" class="form-control" name="dob" value="" placeholder="Date" id="dob" required> </div>
                                 <div class=" form-primary"> <label class="label"><b>Upload Photo</b></label></div>
-                                <div class="form-group form-primary"> <input type="file" class="form-control" name="photo" accept = ".image/*" id="photo" required> </div>
+                                <div class="form-group form-primary"> <input type="file" class="form-control" name="chefphoto" accept = ".image/*" id="chefphoto" required> </div>
                                 <div class=" form-primary"> <label class="label"><b>Upload Documents</b></label></div>
                                 <div class="form-group form-primary"> <input type="file" class="form-control" name="files" id="files" multiple required> </div>
                                 <div class=" form-primary"> <label class="label"><b>Enter Bio</b></label></div>
