@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import RecipeCategory,GeneralRecipe,Appliance
+from .models import RecipeCategory,GeneralRecipe,Appliance, ApplianceCategory
 from enduser.models import EndUser
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.sites.shortcuts import get_current_site
@@ -21,6 +21,14 @@ def homepage(request):
 	
 def recipescategories(request):
 	return render(request=request,template_name="main/recipecategories.html",context={"categories":RecipeCategory.objects.all(),"count":RecipeCategory.objects.count()})	
+def about(request):
+	return render(request=request, template_name="main/about.html")
+
+def contact(request):
+	return render(request=request, template_name="main/contact.html")
+	
+def appliancecategories(request):
+	return render(request=request,template_name="main/appliancecategories.html", context={'categories':ApplianceCategory.objects.all(), "count":ApplianceCategory.objects.count()} )
 
 def signup(request):
 	if request.method=='POST':
@@ -109,4 +117,9 @@ def single_slug(request,single_slug):
 	if single_slug in recipe:
 		recipeinfo= GeneralRecipe.objects.get(recipe_slug=single_slug)
 		return render(request,"main/recipe.html",context={"recipe":recipeinfo})
-		
+	appliancecategories=[c.category_slug for c in ApplianceCategory.objects.all()] #bakingAppliances, all
+	if single_slug in appliancecategories:
+		category= ApplianceCategory.objects.get(category_slug=single_slug)
+		matching_appliances=Appliance.objects.filter(appliance_category__category_slug=single_slug) #bakingAppliances == bakingAppliances
+		return render(request,"main/appliances.html",context={"appliances":matching_appliances, "category":category})
+
