@@ -12,7 +12,7 @@ class EndUser(models.Model):
     date_joined=models.DateTimeField(default=django.utils.timezone.now)  
     enduser_dob=models.DateField(default=datetime.date.today)
     enduser_password=models.CharField(max_length=100)
-    enduser_photo=models.ImageField(upload_to='enduser_images/')
+    enduser_photo=models.ImageField()
     enduser_bio=models.TextField(default="-")
     is_active=models.BooleanField(default=False)
     
@@ -34,7 +34,7 @@ class EndUserRecipe(models.Model):
 
 class EndUserRecipeImage(models.Model): #a recipe posted by chef/user can have multiple photos
     recipe=models.ForeignKey(EndUserRecipe,on_delete=models.SET_NULL,null=True)
-    image=models.ImageField(upload_to='enduser_images/')
+    image=models.ImageField()
 
 class EndUserRecipeLike(models.Model):
     recipe=models.ForeignKey(EndUserRecipe,on_delete=models.SET_NULL,null=True)

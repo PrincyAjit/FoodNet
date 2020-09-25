@@ -12,7 +12,7 @@ class Chef(models.Model):
     date_joined=models.DateTimeField(default=django.utils.timezone.now)
     chef_password=models.CharField(max_length=15)
     chef_dob=models.DateField(default=datetime.date.today)
-    chef_photo=models.ImageField(upload_to='chef_images_files/')
+    chef_photo=models.ImageField()
     chef_bio=models.TextField(default="-")
     validation_counts=models.PositiveIntegerField(default=0) #no of recipes they have validated
     # def __str__(self):#overriding string method that generally returns the object
@@ -26,7 +26,7 @@ class ChefExpertiseArea(models.Model):
 
 class ChefDoc(models.Model):
     chef=models.ForeignKey(Chef,null=True,on_delete=models.SET_NULL,verbose_name="Chef id") #cascade deletes the entry if the corresponding referenced value is deleted
-    doc=models.FileField(unique=True,upload_to='chef_images_files/')
+    doc=models.FileField(unique=True)
 
 
 
@@ -73,7 +73,7 @@ class ChefRecipe(models.Model):
 
 class ChefRecipeImage(models.Model): #a recipe posted by chef/user can have multiple photos
     recipe=models.ForeignKey(ChefRecipe,on_delete=models.SET_NULL,null=True)
-    image=models.ImageField(upload_to='chef_images_files/')
+    image=models.ImageField()
 
 class ChefRecipeLike(models.Model):
     recipe=models.ForeignKey(ChefRecipe,on_delete=models.SET_NULL,null=True)
