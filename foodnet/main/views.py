@@ -43,9 +43,10 @@ def signup(request):
 				photo=request.FILES['userphoto']
 				logger.info(photo)
 				fs=FileSystemStorage()
-				filename=fs.save('enduser_images/'+photo.name,photo)
+				filename=fs.save(photo.name,photo)
 				photo_url=fs.url(filename)
-				logger.info(photo)
+				photo_url=photo_url[7:]  #removing the media word getting attached,as that is already done by MEDIA_URL
+				logger.info(photo_url)
 				enduser=EndUser(enduser_name=request.POST['name'],enduser_email=request.POST['email'],enduser_dob=request.POST['dob'],enduser_password=encryptedpassword,enduser_photo=photo_url,enduser_bio=request.POST['bio'])
 				enduser.is_active=False
 				enduser.save()
